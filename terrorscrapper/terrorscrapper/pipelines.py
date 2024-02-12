@@ -13,7 +13,7 @@ class TerrorscrapperPipeline:
     def process_item(self, item, spider):
         adapter = ItemAdapter(item)
         ## Strip all whitespaces from strings
-        tuple_cat = ['url', 'image_url', 'dob', 'reward']
+        tuple_cat = ['url', 'image_url', 'dob']
         for field_name in tuple_cat:
             value = adapter.get(field_name)
             if value == (None,) or value == []:
@@ -21,7 +21,7 @@ class TerrorscrapperPipeline:
             else:    
                 adapter[field_name] = value[0].strip()
         
-        list_cat = ['title', 'about', 'associated_location', 'associated_organization']
+        list_cat = ['title', 'about', 'associated_location', 'associated_organization', 'reward']
         for cat in list_cat:
             value = adapter.get(cat)
             if value == ([],):
@@ -31,16 +31,16 @@ class TerrorscrapperPipeline:
         # char = {"\u00a0" : "", "\u2018": "‘", "\u2018":"’"}
                 
         reward_cat = ['reward']
-        for reward in reward_cat:    
-            value = adapter.get(reward)
-            adapter[reward] = value[6:]
-        
+        for reward in reward_cat:
+            if reward is "":
+                adapter[reward] = "null"
+            else:    
+                value = adapter.get(reward)
+                adapter[reward] = value[6:]
+                
         date_cat = ['dob']
-        from datetime import datetime
-
         for dob in date_cat:
             value = adapter.get(dob)
-            print("Original value:", value)  # Debugging output
             if value == "null":
                 adapter[dob] = "null"
             elif ";" in value:
