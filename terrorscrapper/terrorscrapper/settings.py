@@ -94,5 +94,5 @@ ITEM_PIPELINES = {
 from terrorscrapper.SaveFile import SaveFile
 FEEDS = {
     SaveFile.json_file() : {'format' : 'json'},
-   #  SaveFile.xlsx_file() : {'format' : 'xlsx'},
+   #  SaveFile.xlsx_file() : {'format' : 'xlsx', 'encoding' : 'utf-8'},
     }

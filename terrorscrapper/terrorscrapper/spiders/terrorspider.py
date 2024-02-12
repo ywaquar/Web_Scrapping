@@ -10,7 +10,7 @@ class TerrorSpider(scrapy.Spider):
     custom_settings = {
         'FEEDS':{
             SaveFile.json_file() : {'format' : 'json'},
-            # SaveFile.xlsx_file() : {'format' : 'xlsx'},
+            # SaveFile.xlsx_file() : {'format' : 'xlsx', 'encoding' : 'utf-8'},
             }
             # 'FEED_EXPORT_ENCODING' : 'utf-8'
     }
@@ -33,11 +33,10 @@ class TerrorSpider(scrapy.Spider):
         
         terror_item['url'] = response.url,
         terror_item['title'] = response.xpath('//*[@data-id ="f2eae65"]//text()').getall(),
+        terror_item['reward'] = response.xpath('//*[@data-id ="5e60756"]//text()').getall(),
+        terror_item['associated_organization'] = response.xpath('//*[@data-id ="b7c9ae6"]//text()').getall(),
+        terror_item['associated_location'] = response.xpath('//*[@data-id ="0fa6be9"]//text()').getall(),
         terror_item['about'] = response.css('.elementor-widget-container p::text')[:-3].extract(),
         terror_item['image_url'] = response.css('.gallery-item a::attr(href)').get(),
         terror_item['dob'] = response.xpath('//*[@data-id ="9a896ea"]//text()').get(),
-        terror_item['associated_location'] = response.xpath('//*[@data-id ="0fa6be9"]//text()').getall(),
-        terror_item['associated_organization'] = response.xpath('//*[@data-id ="b7c9ae6"]//text()').getall(),
-        terror_item['reward'] = response.xpath('//*[@data-id ="5e60756"]//text()').getall()
-
         yield terror_item

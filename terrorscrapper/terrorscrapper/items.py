@@ -14,10 +14,11 @@ class TerrorscrapperItem(scrapy.Item):
 class TerrorItem(scrapy.Item):
     url = scrapy.Field()
     title = scrapy.Field()
+    reward = scrapy.Field()
+    associated_organization = scrapy.Field()
+    associated_location = scrapy.Field()
     about = scrapy.Field()
     image_url = scrapy.Field()
     dob = scrapy.Field()
-    associated_location = scrapy.Field()
-    associated_organization = scrapy.Field()
-    reward = scrapy.Field()
+    
     
