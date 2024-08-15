@@ -73,3 +73,10 @@ Mobile: +91-8269058687
 
 ##### Add the following in the scrapy.cfg below the dafault
 `shell = ipython`
+
+#### Input Task
+
+[Scraping Test (1).pdf](https://github.com/user-attachments/files/16621102/Scraping.Test.1.pdf)
+
+#### OutPut CSV
+[terrordata.csv](https://github.com/user-attachments/files/16621110/terrordata.csv)
